@@ -1,7 +1,12 @@
 {
-  "name": "react-hooks-state-events-mini-project",
+  "name": "react-hooks-component-props-mini-project",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -12,7 +17,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "mocha": "^8.2.1"
+    "mocha": "^11.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
