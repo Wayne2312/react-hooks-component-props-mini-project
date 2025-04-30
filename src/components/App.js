@@ -1,22 +1,46 @@
-import React from "react";
-import blogData from "../data/blog";
-import Article from "./Article";
-import ArticleList from "./ArticleList";
-import Header from "./Header";
-import About from "./About";
-console.log(blogData);
+import React, { useState } from "react";
+import CategoryFilter from "./CategoryFilter";
+import NewTaskForm from "./NewTaskForm";
+import TaskList from "./TaskList";
+
+import { CATEGORIES, TASKS } from "../data";
 
 function App() {
+  const [tasks, setTasks] = useState(TASKS);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  function handleTaskFormSubmit(newTask) {
+    setTasks([...tasks, newTask]);
+  }
+
+  function handleCategoryChange(category) {
+    setSelectedCategory(category);
+  }
+
+
+  function handleDeleteTask(taskText) {
+
+    setTasks(tasks.filter((task) => task.text !== taskText));
+
+  }
+
+  const visibleTasks = tasks.filter((task) =>
+    selectedCategory === "All" ? true : task.category === selectedCategory
+  );
+
   return (
     <div className="App">
-      You're on your own from here! Follow the deliverables; test things out in
-      the browser as you write your code; and good luck!
-      <About />
-    <Article />
-    <ArticleList />
-    <Header />
+      <h2>My tasks</h2>
+      <CategoryFilter
+        categories={CATEGORIES}
+        onCategoryChange={handleCategoryChange}
+      />
+      <NewTaskForm
+        onTaskFormSubmit={handleTaskFormSubmit}
+        categories={CATEGORIES}
+      />
+      <TaskList tasks={visibleTasks} onDeleteTask={handleDeleteTask} />
     </div>
-
   );
 }
 
